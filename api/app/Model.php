@@ -6,20 +6,10 @@ use App\Database;
 
 abstract class Model
 {
-    protected Database $database;
+    protected static Database $database;
 
     public function __construct()
     {
-        $this->database = App::database();
+        static::$database = App::database();
     }
-
-    abstract public function create();
-
-    // abstract public function update($id, $data);
-
-    // abstract public function delete($id);
-
-    // abstract public function find($id);
-
-    // abstract public function all();
 }
