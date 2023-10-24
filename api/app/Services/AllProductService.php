@@ -7,7 +7,7 @@ namespace App\Services;
 use App\App;
 use App\Database;
 
-class ProductService
+class AllProductService
 {
     protected static Database $database;
 
@@ -16,7 +16,7 @@ class ProductService
         static::$database = App::database();
     }
 
-    public function all()
+    public function __invoke(): array
     {
         try {
             static::$database->beginTransaction();
@@ -39,31 +39,7 @@ class ProductService
             return $results;
         } catch (\Exception $exception) {
             static::$database->rollBack();
-            return $exception->getMessage();
+            return [];
         }
     }
-
-    public function deleteMany(array $ids)
-{
-    try {
-        static::$database->beginTransaction();
-
-        $placeholders = implode(',', array_fill(0, count($ids), '?'));
-
-        $statement = static::$database->prepare(
-            "DELETE FROM scandiweb_assignment.products
-            WHERE id IN ({$placeholders})"
-        );
-
-        $statement->execute($ids);
-
-        static::$database->commit();
-
-        return true;
-    } catch (\Exception $exception) {
-        static::$database->rollBack();
-        return $exception->getMessage();
-    }
-}
-
 }

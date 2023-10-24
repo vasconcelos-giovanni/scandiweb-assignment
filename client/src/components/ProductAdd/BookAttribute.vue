@@ -1,24 +1,66 @@
 <template>
-  <form-input
-    v-model="inputSize"
-    label-text="Size"
-    input-name-and-id="size"
-    input-html-type="number"
-  />
-  <p>Please, provide size.</p>
+  <div>
+    <p class="fs-6">Please provide weight in KG</p>
+    <FormInput
+      id="weight"
+      v-model="formData.weight"
+      name="weight"
+      label="Weight (KG)"
+      required
+    >
+      <template #errorMessages>
+        <p
+          v-for="error in v$.formData.weight.$errors"
+          :key="error.uid"
+          class="text-danger"
+          role="alert"
+        >
+          {{ error.$message }}
+        </p>
+      </template>
+    </FormInput>
+  </div>
 </template>
 
-<!-- <script>
+<script>
+import { useVuelidate } from '@vuelidate/core';
+import { helpers, required, numeric } from '@vuelidate/validators';
 import { FormInput } from '.';
 
 export default {
   components: {
     FormInput,
   },
+  setup() {
+    return {
+      v$: useVuelidate(),
+    };
+  },
   data() {
     return {
-      inputSize: null,
+      formData: {
+        weight: null,
+      },
+      invalidTypeMessage: 'Please provide the indicated data type.',
+    };
+  },
+  validationConfig() {
+    return {
+      $autoDirty: true,
+      $lazy: true,
+      $rewardEarly: true,
+    };
+  },
+  validations() {
+    return {
+      formData: {
+        weight: {
+          $autoDirty: true,
+          required,
+          numeric: helpers.withMessage(this.invalidTypeMessage, numeric),
+        },
+      },
     };
   },
 };
-</script> -->
+</script>

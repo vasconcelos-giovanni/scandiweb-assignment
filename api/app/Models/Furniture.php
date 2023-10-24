@@ -6,14 +6,16 @@ namespace App\Models;
 
 use PDO;
 
-class Dvd extends Product
+class Furniture extends Product
 {
     public function __construct(
         private int $productTypeId,
         private string $sku,
         private string $name,
         private float $price,
-        private int $size
+        private int $height,
+        private int $width,
+        private int $length
     )
     {      
         parent::__construct(
@@ -30,7 +32,9 @@ class Dvd extends Product
         $sku = $this->getSku();
         $name = $this->getName();
         $price = $this->getPrice();
-        $size = $this->getSize();
+        $height = $this->getHeight();
+        $width = $this->getWidth();
+        $length = $this->getLength();
 
         try {
             self::$database->beginTransaction();
@@ -43,7 +47,9 @@ class Dvd extends Product
                             sku,
                             name,
                             price,
-                            size
+                            height,
+                            width,
+                            length
                         )
                     VALUES
                         (
@@ -51,7 +57,9 @@ class Dvd extends Product
                             :sku,
                             :name,
                             :price,
-                            :size
+                            :height,
+                            :width,
+                            :length
                         );
                 SQL
             );
@@ -60,7 +68,9 @@ class Dvd extends Product
             $statement->bindValue(':sku', $sku, PDO::PARAM_STR);
             $statement->bindValue(':name', $name, PDO::PARAM_STR);
             $statement->bindValue(':price', $price, PDO::PARAM_STR);
-            $statement->bindValue(':size', $size, PDO::PARAM_INT);
+            $statement->bindValue(':height', $height, PDO::PARAM_INT);
+            $statement->bindValue(':width', $width, PDO::PARAM_INT);
+            $statement->bindValue(':length', $length, PDO::PARAM_INT);
             
             $statement->execute();
             
@@ -69,19 +79,39 @@ class Dvd extends Product
             return true;
         } catch (\Exception $exception) {
             static::$database->rollBack();
-        }
-        
+        }        
     }
 
-    public function getSize(): int
+    public function getHeight(): int
     {
-        return $this->size;
+        return $this->height;
     }
 
-    public function setSize(int $size): self
+    public function setHeight(int $height): self
     {
-        $this->size = $size;
+        $this->height = $height;
+        return $this;
+    }
 
+    public function getWidth(): int
+    {
+        return $this->width;
+    }
+
+    public function setWidth(int $width): self
+    {
+        $this->width = $width;
+        return $this;
+    }
+
+    public function getLength(): int
+    {
+        return $this->length;
+    }
+
+    public function setLength(int $length): self
+    {
+        $this->length = $length;
         return $this;
     }
 }

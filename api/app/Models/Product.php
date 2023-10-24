@@ -22,107 +22,65 @@ abstract class Product extends Model
         $this->setId(0);
     }
 
-    abstract public function create(): true|string;
+    abstract public function create(): true;
 
-
-
-    /**
-     * Get the value of productTypeId
-     */ 
-    public function getProductId()
+    public function getProductId(): int
     {
-            return $this->productTypeId;
+        return $this->productTypeId;
+    }
+ 
+    public function setProductId(int $productTypeId): self
+    {
+        $this->productTypeId = $productTypeId;
+
+        return $this;
     }
 
-    /**
-     * Set the value of productTypeId
-     *
-     * @return  static
-     */ 
-    public function setProductId($productTypeId)
+    public function getId(): int
     {
-            $this->productTypeId = $productTypeId;
-
-            return $this;
+        return $this->id;
     }
 
-    /**
-     * Get the value of id
-     */ 
-    public function getId()
+    public function setId(int $id): self
     {
-            return $this->id;
+        $this->id = $id;
+
+        return $this;
+    }
+ 
+    public function getSku(): string
+    {
+        return $this->sku;
     }
 
-    /**
-     * Set the value of idpro
-     *
-     * @return  static
-     */ 
-    public function setId($id)
+    public function setSku(string $sku): self
     {
-            $this->id = $id;
+        $this->sku = $sku;
 
-            return $this;
+        return $this;
     }
 
-    /**
-     * Get the value of sku
-     */ 
-    public function getSku()
+    public function getName(): string
     {
-            return $this->sku;
+        return $this->name;
     }
 
-    /**
-     * Set the value of sku
-     *
-     * @return  static
-     */ 
-    public function setSku($sku)
+    public function setName(string $name): self
     {
-            $this->sku = $sku;
+        $this->name = $name;
 
-            return $this;
+        return $this;
     }
 
-    /**
-     * Get the value of name
-     */ 
-    public function getName()
+    public function getPrice(): float
     {
-            return $this->name;
+        return $this->price;
     }
 
-    /**
-     * Set the value of name
-     *
-     * @return  static
-     */ 
-    public function setName($name)
+    public function setPrice(float $price): self
     {
-            $this->name = $name;
+        $this->price = $price;
 
-            return $this;
-    }
-
-    /**
-     * Get the value of price
-     */ 
-    public function getPrice()
-    {
-            return $this->price;
-    }
-
-    /**
-     * Set the value of price
-     *
-     * @return  static
-     */ 
-    public function setPrice($price)
-    {
-            $this->price = $price;
-
-            return $this;
+        return $this;
     }
 }

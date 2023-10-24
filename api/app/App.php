@@ -3,42 +3,16 @@
 namespace App;
 
 use App\Exceptions\RouterException;
-use App\Helpers\Debug;
 
-/**
- * The main application class.
- */
 class App
 {
-    /**
-     * The router instance.
-     *
-     * @var Router $router
-     */
-    protected $router;
+    protected Router $router;
 
-    /**
-     * The request data.
-     *
-     * @var array $request
-     */
-    protected $request;
+    protected array $request;
 
-    /**
-     * The database connection.
-     *
-     * @var Database
-     */
-    private static $databaseConnection;
+    private static Database $databaseConnection;
 
-    /**
-     * Constructor.
-     *
-     * @param Router $router The router instance.
-     * @param array $request The request data.
-     * @param Config $config The configuration.
-     */
-    public function __construct($router, $request, $config)
+    public function __construct(Router $router, array $request, Config $config)
     {
         $this->router = $router;
         $this->request = $request;

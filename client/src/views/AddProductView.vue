@@ -1,6 +1,6 @@
 <template>
   <header>
-    <page-header
+    <PageHeader
       page-title="Product Add"
       blue-button-text="Save"
       red-button-text="Cancel"
@@ -13,10 +13,10 @@
     <form
       id="productForm"
       method="POST"
-      action="#"
-      class="col-12"
+      :action="saveRoute"
+      class="col-12 product_formX"
     >
-      <form-input-style
+      <FormInputStyle
         label-for-attr="sku"
         label-text="SKU"
       >
@@ -25,6 +25,7 @@
           v-model="formData.sku"
           class="form-control"
           name="sku"
+          required
         />
         <p
           v-for="error in v$.formData.sku.$errors"
@@ -34,9 +35,9 @@
         >
           {{ error.$message }}
         </p>
-      </form-input-style>
+      </FormInputStyle>
 
-      <form-input-style
+      <FormInputStyle
         label-for-attr="name"
         label-text="Name"
       >
@@ -45,6 +46,7 @@
           v-model="formData.name"
           class="form-control"
           name="name"
+          required
         />
         <p
           v-for="error in v$.formData.name.$errors"
@@ -54,9 +56,9 @@
         >
           {{ error.$message }}
         </p>
-      </form-input-style>
+      </FormInputStyle>
 
-      <form-input-style
+      <FormInputStyle
         label-for-attr="price"
         label-text="Price"
       >
@@ -65,6 +67,7 @@
           v-model="formData.price"
           class="form-control"
           name="price"
+          required
         />
         <p
           v-for="error in v$.formData.price.$errors"
@@ -74,152 +77,54 @@
         >
           {{ error.$message }}
         </p>
-      </form-input-style>
+      </FormInputStyle>
 
-      <!-- <form-input-style
-        label-for-attr="typeSwitcher"
-        label-text="Type Switcher"
-      >
-        <select
-          id="typeSwitcher"
-          class="form-select"
-        >
-          <option
-            value="test"
-            selected
-          >
-            Type Switcher
-          </option>
-          <option value="dvd">DVD</option>
-          <option value="furniture">Furniture</option>
-          <option value="book">Book</option>
-        </select>
-      </form-input-style> -->
-      <!-- <div v-if=""></div> -->
-
-      <form-input-2
+      <FormInput
         name="typeSwitcher"
         label="TypeSwitcher"
         custom-input
       >
         <template #customInput>
           <select
-            id="typeSwitcher"
-            ref="teste"
-            v-model="formData.product"
+            id="productType"
+            ref="typeSwitcher"
+            v-model="formData.productTypeId"
             class="form-control form-select"
+            name="productTypeId"
+            required
           >
-            <option value="default">Type Switcher</option>
-            <option value="dvd">DVD</option>
-            <option value="furniture">Furniture</option>
-            <option value="book">Book</option>
+            <option
+              value="1"
+              data-attribute-component="DvdAttribute"
+            >
+              DVD-disc
+            </option>
+            <option
+              value="2"
+              data-attribute-component="FurnitureAttribute"
+            >
+              Furniture
+            </option>
+            <option
+              value="3"
+              data-attribute-component="BookAttribute"
+            >
+              Book
+            </option>
           </select>
-          <p
-            v-for="error in v$.formData.test.$errors"
-            :key="error.uid"
-            class="text-danger"
-            role="alert"
-          >
-            {{ error.$message }}
-          </p>
         </template>
-      </form-input-2>
+      </FormInput>
 
-      <div v-if="formData.product == 'dvd'">
-        <form-input-2
-          id="size"
-          v-model="formData.size"
-          name="size"
-          label="Size"
-        >
-          <template #errorMessages>
-            <p
-              v-for="error in v$.formData.size.$errors"
-              :key="error.uid"
-              class="text-danger"
-              role="alert"
-            >
-              {{ error.$message }}
-            </p>
-          </template>
-        </form-input-2>
-      </div>
+      <KeepAlive>
+        <component :is="activeProductType"></component>
+      </KeepAlive>
 
-      <div v-if="formData.product == 'furniture'">
-        <form-input-2
-          id="height"
-          v-model="formData.height"
-          name="height"
-          label="Height (CM)"
-        >
-          <template #errorMessages>
-            <p
-              v-for="error in v$.formData.height.$errors"
-              :key="error.uid"
-              class="text-danger"
-              role="alert"
-            >
-              {{ error.$message }}
-            </p>
-          </template>
-        </form-input-2>
-
-        <form-input-2
-          id="width"
-          v-model="formData.width"
-          name="width"
-          label="Width (CM)"
-        >
-          <template #errorMessages>
-            <p
-              v-for="error in v$.formData.width.$errors"
-              :key="error.uid"
-              class="text-danger"
-              role="alert"
-            >
-              {{ error.$message }}
-            </p>
-          </template>
-        </form-input-2>
-
-        <form-input-2
-          id="length"
-          v-model="formData.length"
-          name="length"
-          label="Length (CM)"
-        >
-          <template #errorMessages>
-            <p
-              v-for="error in v$.formData.length.$errors"
-              :key="error.uid"
-              class="text-danger"
-              role="alert"
-            >
-              {{ error.$message }}
-            </p>
-          </template>
-        </form-input-2>
-      </div>
-
-      <div v-if="formData.product == 'book'">
-        <form-input-2
-          id="weight"
-          v-model="formData.weight"
-          name="weight"
-          label="Weight"
-        >
-          <template #errorMessages>
-            <p
-              v-for="error in v$.formData.weight.$errors"
-              :key="error.uid"
-              class="text-danger"
-              role="alert"
-            >
-              {{ error.$message }}
-            </p>
-          </template>
-        </form-input-2>
-      </div>
+      <input
+        v-show="false"
+        ref="submitInput"
+        type="submit"
+        value="Submit"
+      />
     </form>
   </main>
 </template>
@@ -228,14 +133,21 @@
 import { useVuelidate } from '@vuelidate/core';
 import { helpers, required, numeric } from '@vuelidate/validators';
 import { FormInputStyle } from '../components/ProductAdd';
-import { FormInput2 } from '../components/ProductAdd';
+import { FormInput } from '../components/ProductAdd';
+import { DvdAttribute } from '../components/ProductAdd';
+import { FurnitureAttribute } from '../components/ProductAdd';
+import { BookAttribute } from '../components/ProductAdd';
+import { BASE_API_URL } from './../globalConstants';
 
 const preventDefautValue = (selected) => selected != 'default';
 
 export default {
   components: {
     FormInputStyle,
-    FormInput2,
+    FormInput,
+    DvdAttribute,
+    FurnitureAttribute,
+    BookAttribute,
   },
   setup() {
     return {
@@ -249,7 +161,7 @@ export default {
         name: '',
         price: null,
         test: null,
-        product: 'default',
+        productTypeId: '1',
         size: null,
         height: null,
         width: null,
@@ -257,21 +169,33 @@ export default {
         weight: null,
       },
       invalidTypeMessage: 'Please provide the indicated data type.',
+      saveRoute: BASE_API_URL + '/add-product',
     };
   },
-  computed: {},
-  methods: {
-    teste() {
-      console.log(this.$refs.teste.value);
+  computed: {
+    activeProductType() {
+      switch (this.formData.productTypeId) {
+        case '1':
+          return 'DvdAttribute';
+        case '2':
+          return 'FurnitureAttribute';
+        case '3':
+          return 'BookAttribute';
+
+        default:
+          break;
+      }
+      return null;
     },
+  },
+  methods: {
     addProduct() {
-      console.log('Product added.');
+      const submitInput = this.$refs.submitInput;
+
+      submitInput.click();
     },
     cancel() {
-      console.log('Canceled.');
-    },
-    invalidFunction() {
-      console.log('Invalid');
+      this.$router.push('/');
     },
   },
   validationConfig() {
@@ -287,28 +211,17 @@ export default {
         sku: {
           $autoDirty: true,
           required,
-          // numeric: helpers.withMessage(
-          //   'Please provide the indicated data type.',
-          // ),
         },
         name: {
           $autoDirty: true,
           required,
-          // numeric: helpers.withMessage(
-          //   'Please provide the indicated data type.',
-          // ),
         },
         price: {
           $autoDirty: true,
           required,
           numeric: helpers.withMessage(this.invalidTypeMessage, numeric),
         },
-        test: {
-          $autoDirty: true,
-          required,
-          numeric: helpers.withMessage(this.invalidTypeMessage, numeric),
-        },
-        product: {
+        productTypeId: {
           $autoDirty: true,
           required,
           preventDefautValue: helpers.withMessage(

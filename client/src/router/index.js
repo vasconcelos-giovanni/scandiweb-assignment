@@ -1,8 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import {
-  HomeView,
-  AddProductView
-} from '../views';
+import { HomeView, AddProductView } from '../views';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,14 +7,14 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
     },
     {
-      path: '/addproduct',
+      path: '/add-product',
       name: 'addProduct',
-      component: AddProductView
-    }
-  ]
-})
+      component: AddProductView,
+    },
+  ],
+});
 
-export default router
+export default router;

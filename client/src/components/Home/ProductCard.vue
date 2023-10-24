@@ -1,13 +1,14 @@
 <template>
   <label
     class="product-card d-block form-check-label h-11 w-16 text-center border border-2 border-secondary rounded p-2"
-    for="inlineCheckbox1"
+    :for="checkboxId"
   >
     <input
-      id="inlineCheckbox1"
-      class="form-check-input form-check"
+      :id="checkboxId"
+      class="form-check-input form-check delete-checkbox"
       type="checkbox"
-      value="option1"
+      name="productTypeIds[]"
+      :value="id"
     />
     <ul class="list-unstyled m-0 d-flex flex-column">
       <li>{{ sku }}</li>
@@ -15,9 +16,9 @@
       <li>${{ price }}</li>
       <li v-if="size">Size: {{ size }}MB</li>
       <li v-if="isFurniture">
-        Dimension: {{ height }}x{{ width }}x{{ length }}cm
+        Dimension: {{ height }}x{{ width }}x{{ length }}
       </li>
-      <li v-if="weight">Weight: {{ weight }}g</li>
+      <li v-if="weight">Weight: {{ weight }}KG</li>
     </ul>
   </label>
 </template>
@@ -25,6 +26,10 @@
 <script>
 export default {
   props: {
+    id: {
+      type: Number,
+      required: true,
+    },
     sku: {
       type: String,
       required: true,
@@ -57,6 +62,11 @@ export default {
       type: Number,
       required: false,
     },
+  },
+  data() {
+    return {
+      checkboxId: 'checkbox' + this.id,
+    };
   },
   computed: {
     isFurniture() {

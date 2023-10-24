@@ -18,7 +18,7 @@ class Debug
         var_dump($data);
         echo '</pre>';
 
-        die();
+        die;
     }
 
     /**
@@ -35,6 +35,6 @@ class Debug
         print_r($data);
         echo '</pre>';
 
-        die();
+        die;
     }
 }

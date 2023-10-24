@@ -6,14 +6,14 @@ namespace App\Models;
 
 use PDO;
 
-class Dvd extends Product
+class Book extends Product
 {
     public function __construct(
         private int $productTypeId,
         private string $sku,
         private string $name,
         private float $price,
-        private int $size
+        private float $weight
     )
     {      
         parent::__construct(
@@ -30,7 +30,7 @@ class Dvd extends Product
         $sku = $this->getSku();
         $name = $this->getName();
         $price = $this->getPrice();
-        $size = $this->getSize();
+        $weight = $this->getWeight();
 
         try {
             self::$database->beginTransaction();
@@ -43,7 +43,7 @@ class Dvd extends Product
                             sku,
                             name,
                             price,
-                            size
+                            weight
                         )
                     VALUES
                         (
@@ -51,7 +51,7 @@ class Dvd extends Product
                             :sku,
                             :name,
                             :price,
-                            :size
+                            :weight
                         );
                 SQL
             );
@@ -60,7 +60,7 @@ class Dvd extends Product
             $statement->bindValue(':sku', $sku, PDO::PARAM_STR);
             $statement->bindValue(':name', $name, PDO::PARAM_STR);
             $statement->bindValue(':price', $price, PDO::PARAM_STR);
-            $statement->bindValue(':size', $size, PDO::PARAM_INT);
+            $statement->bindValue(':weight', $weight, PDO::PARAM_STR);
             
             $statement->execute();
             
@@ -70,18 +70,16 @@ class Dvd extends Product
         } catch (\Exception $exception) {
             static::$database->rollBack();
         }
-        
     }
 
-    public function getSize(): int
+    public function getWeight()
     {
-        return $this->size;
+        return $this->weight;
     }
 
-    public function setSize(int $size): self
+    public function setWeight(float $weight): self
     {
-        $this->size = $size;
-
+        $this->weight = $weight;
         return $this;
     }
 }

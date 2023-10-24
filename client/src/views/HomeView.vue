@@ -1,28 +1,46 @@
 <template>
-  <page-header
+  <PageHeader
     title="Product List"
     blue-button-text="Add"
     red-button-text="Mass delete"
+    @blue-button-click="addProduct"
+    @red-button-click="massDelete"
   />
-  <main class="d-flex justify-content-center flex-wrap gap-3">
-    <product-card
-      v-for="product in products"
-      :key="product.id"
-      :sku="product.sku"
-      :name="product.name"
-      :price="product.price"
-      :size="product.size"
-      :width="product.width"
-      :height="product.height"
-      :length="product.length"
-      :weight="product.weight"
-    />
+  <main>
+    <form
+      ref="form"
+      action="http://localhost:8000/destroy-products"
+      method="post"
+      class="d-flex justify-content-center flex-wrap gap-3"
+    >
+      <ProductCard
+        v-for="product in products"
+        :id="product.id"
+        :key="product.id"
+        :sku="product.sku"
+        :name="product.name"
+        :price="product.price"
+        :size="product.size"
+        :width="product.width"
+        :height="product.height"
+        :length="product.length"
+        :weight="product.weight"
+      />
+
+      <input
+        v-show="false"
+        ref="submitInput"
+        type="submit"
+        value="Submit"
+      />
+    </form>
   </main>
 </template>
 
 <script>
 import { ProductCard } from '../components/Home';
 import axios from 'axios';
+import { BASE_API_URL } from './../globalConstants';
 
 export default {
   components: {
@@ -38,11 +56,17 @@ export default {
   },
   methods: {
     async fetchProducts() {
-      const response = await axios.get('http://localhost:8000/');
+      const response = await axios.get(BASE_API_URL);
 
       this.products = response.data;
+    },
+    addProduct() {
+      this.$router.push('/add-product');
+    },
+    massDelete() {
+      const submitInput = this.$refs.submitInput;
 
-      console.log(this.products[3].height);
+      submitInput.click();
     },
   },
 };

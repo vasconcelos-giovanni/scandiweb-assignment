@@ -1,6 +1,13 @@
 import FormInputStyle from './FormInputStyle.vue';
+import FormInput from './FormInput.vue';
 import BookAttribute from './BookAttribute.vue';
-import FormInput2 from './FormInput2.vue';
 import DvdAttribute from './DvdAttribute.vue';
+import FurnitureAttribute from './FurnitureAttribute.vue';
 
-export { FormInputStyle, BookAttribute, FormInput2, DvdAttribute };
+export {
+  FormInputStyle,
+  FormInput,
+  BookAttribute,
+  DvdAttribute,
+  FurnitureAttribute,
+};
