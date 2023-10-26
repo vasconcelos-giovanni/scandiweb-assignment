@@ -10,14 +10,12 @@ class CreateBookService
 {
     public function __invoke()
     {
-        $productTypeId = (int) $_POST['productTypeId'];
         $sku = $_POST['sku'];
         $name = $_POST['name'];
         $price = (float) $_POST['price'];
         $weight = (int) $_POST['weight'];
 
         $book = new Book(
-            $productTypeId,
             $sku,
             $name,
             $price,

@@ -11,7 +11,6 @@ class CreateDvdService
 {
     public function __invoke()
     {
-        $productTypeId = (int) $_POST['productTypeId'];
         $sku = $_POST['sku'];
         $name = $_POST['name'];
         $price = (float) $_POST['price'];
@@ -19,7 +18,6 @@ class CreateDvdService
 
 
         $dvd = new Dvd(
-            $productTypeId,
             $sku,
             $name,
             $price,

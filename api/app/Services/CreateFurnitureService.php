@@ -10,7 +10,6 @@ class CreateFurnitureService
 {
     public function __invoke()
     {
-        $productTypeId = (int) $_POST['productTypeId'];
         $sku = $_POST['sku'];
         $name = $_POST['name'];
         $price = (float) $_POST['price'];
@@ -19,7 +18,6 @@ class CreateFurnitureService
         $length = (int) $_POST['length'];
 
         $furniture = new Furniture(
-            $productTypeId,
             $sku,
             $name,
             $price,

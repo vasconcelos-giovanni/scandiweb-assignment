@@ -14,7 +14,7 @@
       id="product_form"
       method="POST"
       :action="formAction"
-      class="col-12 product_formX"
+      class="col-12"
     >
       <FormInputStyle
         label-for-attr="sku"
@@ -88,25 +88,25 @@
           <select
             id="productType"
             ref="typeSwitcher"
-            v-model="formData.productTypeId"
+            v-model="formData.productTypeName"
             class="form-control form-select"
-            name="productTypeId"
+            name="productTypeName"
             required
           >
             <option
-              value="1"
+              value="DVD"
               data-attribute-component="DvdAttribute"
             >
               DVD
             </option>
             <option
-              value="2"
+              value="Furniture"
               data-attribute-component="FurnitureAttribute"
             >
               Furniture
             </option>
             <option
-              value="3"
+              value="Book"
               data-attribute-component="BookAttribute"
             >
               Book
@@ -161,7 +161,7 @@ export default {
         name: '',
         price: null,
         test: null,
-        productTypeId: '1',
+        productTypeName: 'DVD',
         size: null,
         height: null,
         width: null,
@@ -174,12 +174,12 @@ export default {
   },
   computed: {
     activeProductType() {
-      switch (this.formData.productTypeId) {
-        case '1':
+      switch (this.formData.productTypeName) {
+        case 'DVD':
           return 'DvdAttribute';
-        case '2':
+        case 'Furniture':
           return 'FurnitureAttribute';
-        case '3':
+        case 'Book':
           return 'BookAttribute';
 
         default:
@@ -221,7 +221,7 @@ export default {
           required,
           numeric: helpers.withMessage(this.invalidTypeMessage, numeric),
         },
-        productTypeId: {
+        productTypeName: {
           $autoDirty: true,
           required,
           preventDefautValue: helpers.withMessage(

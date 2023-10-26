@@ -12,7 +12,6 @@ abstract class Product extends Model
     private int $id;
 
     public function __construct(
-        private int $productTypeId = 0,
         private string $sku = '',
         private string $name = '',
         private float $price = 0
@@ -23,18 +22,6 @@ abstract class Product extends Model
     }
 
     abstract public function create(): true;
-
-    public function getProductId(): int
-    {
-        return $this->productTypeId;
-    }
- 
-    public function setProductId(int $productTypeId): self
-    {
-        $this->productTypeId = $productTypeId;
-
-        return $this;
-    }
 
     public function getId(): int
     {
