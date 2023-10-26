@@ -11,7 +11,7 @@
 
   <main>
     <form
-      id="productForm"
+      id="product_form"
       method="POST"
       :action="formAction"
       class="col-12 product_formX"
