@@ -24,7 +24,7 @@ class DestroyManyProductService
             $placeholders = implode(',', array_fill(0, count($ids), '?'));
 
             $statement = static::$database->prepare(
-                "DELETE FROM scandiweb_assignment.products
+                "DELETE FROM products
                 WHERE id IN ({$placeholders})"
             );
 
@@ -35,6 +35,9 @@ class DestroyManyProductService
             return true;
         } catch (\Exception $exception) {
             static::$database->rollBack();
+            echo 'OI';
+            header("HTTP/1.1 404 Not Found");
+            die;
         }
     }
 
