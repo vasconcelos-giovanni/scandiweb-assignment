@@ -2,7 +2,7 @@
   <PageHeader
     title="Product List"
     blue-button-text="Add"
-    red-button-text="Mass delete"
+    red-button-text="MASS DELETE"
     @blue-button-click="addProduct"
     @red-button-click="massDelete"
   />
