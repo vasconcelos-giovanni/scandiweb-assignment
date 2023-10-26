@@ -15,7 +15,7 @@ $dotenv->load();
 /* -------------------------------------------------------------------------- */
 define('ROUTES_PATH', __DIR__ . '/routes'); // Assuming routes directory is in the root
 define('SERVICES_NAMESPACE', 'App\Services\\');
-define('BASE_CLIENT_URL', 'http://localhost:5173');
+define('BASE_CLIENT_URL', 'https://scandiweb-assignment-five.vercel.app');
 
 /* -------------------------------------------------------------------------- */
 /*                                   Imports                                  */
