@@ -13,7 +13,7 @@
     <form
       id="productForm"
       method="POST"
-      :action="saveRoute"
+      :action="formAction"
       class="col-12 product_formX"
     >
       <FormInputStyle
@@ -169,7 +169,7 @@ export default {
         weight: null,
       },
       invalidTypeMessage: 'Please provide the indicated data type.',
-      saveRoute: BASE_API_URL + '/add-product',
+      formAction: BASE_API_URL + '/add-product',
     };
   },
   computed: {

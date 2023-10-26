@@ -9,7 +9,7 @@
   <main>
     <form
       ref="form"
-      action="http://localhost:8000/destroy-products"
+      action="formAction"
       method="post"
       class="d-flex justify-content-center flex-wrap gap-3"
     >
@@ -49,6 +49,7 @@ export default {
   data() {
     return {
       products: null,
+      formAction: BASE_API_URL + '/destroy-products',
     };
   },
   created() {

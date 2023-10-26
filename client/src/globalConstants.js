@@ -1,3 +1,3 @@
-const BASE_API_URL = 'http://localhost:8000';
+const BASE_API_URL = 'https://bereguedjonson.000webhostapp.com';
 
 export { BASE_API_URL };
