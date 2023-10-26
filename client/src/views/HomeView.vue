@@ -1,7 +1,7 @@
 <template>
   <PageHeader
     title="Product List"
-    blue-button-text="Add"
+    blue-button-text="ADD"
     red-button-text="MASS DELETE"
     @blue-button-click="addProduct"
     @red-button-click="massDelete"
