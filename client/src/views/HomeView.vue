@@ -9,7 +9,7 @@
   <main>
     <form
       ref="form"
-      action="formAction"
+      :action="formAction"
       method="post"
       class="d-flex justify-content-center flex-wrap gap-3"
     >
