@@ -97,7 +97,7 @@
               value="1"
               data-attribute-component="DvdAttribute"
             >
-              DVD-disc
+              DVD
             </option>
             <option
               value="2"
