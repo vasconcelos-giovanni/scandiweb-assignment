@@ -4,6 +4,7 @@
     <FormInput
       id="size"
       v-model="formData.size"
+      type="number"
       name="size"
       label="Size (MB)"
       required

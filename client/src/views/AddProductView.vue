@@ -65,6 +65,7 @@
         <input
           id="price"
           v-model="formData.price"
+          type="number"
           class="form-control"
           name="price"
           required
@@ -228,31 +229,6 @@ export default {
             'Please select a product.',
             preventDefautValue,
           ),
-        },
-        size: {
-          $autoDirty: true,
-          required,
-          numeric: helpers.withMessage(this.invalidTypeMessage, numeric),
-        },
-        height: {
-          $autoDirty: true,
-          required,
-          numeric: helpers.withMessage(this.invalidTypeMessage, numeric),
-        },
-        width: {
-          $autoDirty: true,
-          required,
-          numeric: helpers.withMessage(this.invalidTypeMessage, numeric),
-        },
-        length: {
-          $autoDirty: true,
-          required,
-          numeric: helpers.withMessage(this.invalidTypeMessage, numeric),
-        },
-        weight: {
-          $autoDirty: true,
-          required,
-          numeric: helpers.withMessage(this.invalidTypeMessage, numeric),
         },
       },
     };

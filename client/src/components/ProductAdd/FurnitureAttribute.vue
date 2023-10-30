@@ -4,6 +4,7 @@
     <FormInput
       id="height"
       v-model="formData.height"
+      type="number"
       name="height"
       label="Height (CM)"
       required
@@ -23,6 +24,7 @@
     <FormInput
       id="width"
       v-model="formData.width"
+      type="number"
       name="width"
       label="Width (CM)"
       required
@@ -42,6 +44,7 @@
     <FormInput
       id="length"
       v-model="formData.length"
+      type="number"
       name="length"
       label="Length (CM)"
       required

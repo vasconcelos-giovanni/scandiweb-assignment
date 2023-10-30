@@ -4,6 +4,7 @@
     <FormInput
       id="weight"
       v-model="formData.weight"
+      type="number"
       name="weight"
       label="Weight (KG)"
       required
