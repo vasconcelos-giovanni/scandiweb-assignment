@@ -11,8 +11,9 @@ cd api
 
 composer install
 ```
+After that, create a MySQL database with and run `database.sql` which is within the API directory.
 
-Further, configure your local enviroments in the `.env` file by copying the boilerplate, `.env.example`.
+Further, configure your local environment variables in the `.env` file by copying the boilerplate, `.env.example`.
 
 ```sh
 cp .env.example .env
